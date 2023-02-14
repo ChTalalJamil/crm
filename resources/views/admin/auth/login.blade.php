@@ -1,167 +1,116 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<style>
-    .login-page {
-        width: 360px;
-        padding: 8% 0 0;
-        margin: auto;
-    }
+<head>
 
-    .form {
-        position: relative;
-        z-index: 1;
-        background: #FFFFFF;
-        max-width: 360px;
-        margin: 0 auto 100px;
-        padding: 45px;
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    }
+    <meta name="csrf" content="{{csrf_token()}}">
+    <title>{{ config('app.name') }} - Admin Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Web Agency Admin Portal." name="description" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    .form input {
-        font-family: "Roboto", sans-serif;
-        outline: 0;
-        background: #f2f2f2;
-        width: 100%;
-        border: 0;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-    }
+    <!-- App css -->
+    <link href="{{asset('dist/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('dist/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('dist/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
-    .form button {
-        font-family: "Roboto", sans-serif;
-        text-transform: uppercase;
-        outline: 0;
-        background: #4CAF50;
-        width: 100%;
-        border: 0;
-        padding: 15px;
-        color: #FFFFFF;
-        font-size: 14px;
-        -webkit-transition: all 0.3 ease;
-        transition: all 0.3 ease;
-        cursor: pointer;
-    }
+</head>
 
-    .form button:hover,
-    .form button:active,
-    .form button:focus {
-        background: #43A047;
-    }
+<body class="authentication-bg">
 
-    .form .message {
-        margin: 15px 0 0;
-        color: #b3b3b3;
-        font-size: 12px;
-    }
+    <div class="account-pages my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            @if(count($errors)>0)
+                            @if($errors)
+                            <div class="alert alert-danger">
+                                Wrong Email or Password!
+                            </div>
+                            @endif
+                            @endif
+                            <div class="row">
 
-    .form .message a {
-        color: #4CAF50;
-        text-decoration: none;
-    }
+                                <div style="margin-left: 15rem!important;" class="col-md-6 mt-5 mb-5">
+                                    <div style="text-align: center;" class="mx-auto mb-5">
+                                        <h2>{{env('APP_NAME')}}</h2>
+                                    </div>
 
-    .container {
-        position: relative;
-        z-index: 1;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-
-    .container:before,
-    .container:after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-
-    .container .info {
-        margin: 50px auto;
-        text-align: center;
-    }
-
-    .container .info h1 {
-        margin: 0 0 15px;
-        padding: 0;
-        font-size: 36px;
-        font-weight: 300;
-        color: #1a1a1a;
-    }
-
-    .container .info span {
-        color: #4d4d4d;
-        font-size: 12px;
-    }
-
-    .container .info span a {
-        color: #000000;
-        text-decoration: none;
-    }
-
-    .container .info span .fa {
-        color: #EF3B3A;
-    }
-
-    body {
-        background: #76b852;
-        /* fallback for old browsers */
-        background: rgb(141, 194, 111);
-        background: linear-gradient(90deg, rgba(141, 194, 111, 1) 0%, #b3b3b3 50%);
-        font-family: "Roboto", sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-</style>
+                                    <h6 class="h5 mb-0 mt-4">Welcome back!</h6>
+                                    <p class="text-muted mt-1 mb-4">Enter your email address and password to
+                                        access admin panel.</p>
 
 
-<div class="login-page">
-    @if(\Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <div class="alert-body">
-            {{ \Session::get('success') }}
-        </div>
-    </div>
-    @endif
-    {{ \Session::forget('success') }}
-    @if(\Session::get('error'))
-    <div class="alert alert-danger fade show" role="alert">
-        <div class="alert-body">
-            {{ \Session::get('error') }}
-        </div>
-    </div>
-    @endif
-    <div class="form">
-        <form class="auth-login-form mt-2" action="{{route('adminLoginPost')}}" method="post">
-            <h3 style=" text-align: center">
-                Admin Login
-            </h3>
-            <!-- <img style="text-align: center; margin-bottom: 10%;" src="../assets/logo.png" width="45%" alt=""> -->
-            @csrf
-            <div class="mb-1">
-                <input required type="text" class="form-control" id="email" name="email" placeholder="Email" autofocus />
-                @if ($errors->has('email'))
-                <span class="help-block font-red-mint">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
+
+                                    <form action="{{route('adminLoginPost')}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label class="form-control-label">Email Address</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="mail"></i>
+                                                    </span>
+                                                </div>
+                                                <input required type="text" class="form-control" id="email" name="email" placeholder="Email" autofocus />
+                                                @if ($errors->has('email'))
+                                                <span class="help-block font-red-mint">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                                @endif
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-4">
+                                            <label class="form-control-label">Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="lock"></i>
+                                                    </span>
+                                                </div>
+                                                <input class="form-control" required type="password" id="password" placeholder="password" name="password" tabindex="1" />
+
+                                                @if ($errors->has('password'))
+                                                <span class="help-block font-red-mint">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-0 text-center">
+                                            <button class="btn btn-primary btn-block" type="submit"> Log In
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+
+
+                    <!-- end row -->
+
+                </div> <!-- end col -->
             </div>
-
-            <div class="mb-1">
-
-                <input required type="password" id="password" placeholder="password" name="password" tabindex="1" />
-
-                @if ($errors->has('password'))
-                <span class="help-block font-red-mint">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-                @endif
-            </div>
-
-            <button type="submit">Login</button>
-        </form>
-
+            <!-- end row -->
+        </div>
+        <!-- end container -->
     </div>
-</div>
-@endsection
+    <!-- end page -->
+
+    <!-- Vendor js -->
+    <script src="{{asset('dist/assets/js/vendor.min.js')}}"></script>
+
+    <!-- App js -->
+    <script src="{{asset('dist/assets/js/app.min.js')}}"></script>
+
+</body>
+
+</html>

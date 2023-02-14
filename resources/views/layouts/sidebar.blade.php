@@ -72,13 +72,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/admin/campaign-list" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             Campaign
                         </p>
                     </a>
                 </li>
+
                 <!-- <li class="nav-item">
                                 <a href="pages/kanban.html" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
@@ -87,14 +88,14 @@
                                 </p>
                                 </a>
                             </li> -->
-                            <!-- <li class="nav-item">
+                <!-- <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>To Do's</p>
                                     </a>
                                 </li> -->
-                                
-                            <!-- <li class="nav-item">
+
+                <!-- <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Chat</p>
@@ -106,6 +107,20 @@
                                 <p>Documentation</p>
                                 </a>
                             </li> -->
+
+            </ul>
+            
+        </nav>
+        <nav style="bottom: 0px;" >
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item" >
+                    <a href="/admin/logout" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Logout
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
